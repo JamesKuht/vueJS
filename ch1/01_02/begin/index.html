@@ -8,15 +8,42 @@
     <body>
 
         <div id="app">
-            <h1>Deck Name</h1>
+            <h1 v-text="deckName"></h1>
+            
+            <div class="user-input">
+                <!-- 'v-model' ties the user input to updating the DOM-->
+                Type Something! <input type="text" v-model="userInput">
+            </div>
+            
 
             <div class="card">
-                <h2>Item</h2>
-                <div>Description</div>
+                <!--v-text just loads the text better, and v-html just reads the text as html-->
+                <!-- the below means 'if flipped then return blank, if not return the front of the first card'-->
+                <h2 v-text="userInput == 'flip' ? '' : cards[0].front"></h2>
+                <div v-html="userInput == 'flip' ?  cards[0].back : '' "></div>
             </div>
+            <!-- ':href' is shorthand for 'vbind:href', we'll be using this shorthand from now on-->
+            <a :href="readMoreUrl">read more</a>
         </div>
 
         <script src="data.js"></script>
+        <script src="https://unpkg.com/vue@3.0.7/dist/vue.global.js"></script>
+        <script>
+            const FlashCardApp = {
+                data() {
+                    return {
+                        deckName: 'Vue.js Fundamentals',
+                        cards,
+                        flipped: false,
+                        readMoreUrl: 'https://v3.vuejs.org/guide',
+                        userInput: 'default'
+                    }
+                }
+            }
+
+            const app =  Vue.createApp(FlashCardApp).mount('#app');
+
+        </script>
 
     </body>
 </html>

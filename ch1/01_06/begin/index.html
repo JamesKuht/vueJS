@@ -9,7 +9,8 @@
         <div id="app">
             <h1 v-text="deckName"></h1>
 
-            <div class="card">
+            <!-- 'v-on' sets up our click handler, in shorthand it is simply '@'. !flipped simply sets the value to it's opposite-->
+            <div @click="flipped = !flipped" class="card">
                 <h2 v-text="flipped ? '' : cards[0].front"></h2>
                 <div v-html="flipped ? cards[0].back : ''"></div>
             </div>
