@@ -11,8 +11,12 @@
 
             <!-- 'v-on' sets up our click handler, in shorthand it is simply '@'. !flipped simply sets the value to it's opposite-->
             <div @click="flipped = !flipped" class="card">
-                <h2 v-text="flipped ? '' : cards[0].front"></h2>
+                <h2 v-text="flipped ? '' : cards[index].front"></h2>
                 <div v-html="flipped ? cards[0].back : ''"></div>
+            </div>
+            
+            <div class="navigation">
+                <button @click="move" type="button">&#8594;</button>
             </div>
 
             <a :href="readMoreUrl">read more</a>
@@ -26,9 +30,16 @@
                     return {
                         deckName: 'Vue.js Fundamentals',
                         cards,
+                        index: 0,
                         flipped: false,
                         readMoreUrl: 'https://v3.vuejs.org/guide'                        
                     };
+                },
+                methods: {
+                    move() {
+                        this.index++;
+                        this.flipped = false
+                    }
                 }
             };
 
